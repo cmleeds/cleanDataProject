@@ -1,15 +1,6 @@
-# find and download data
-fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-fileName <- "Project.zip"
-download.file(fileUrl,fileName,method="curl")
-
-# extract zipped files
-unzip("Project.zip")
-
-
 # load packages
-pks <- c("data.table","dplyr")
 library(data.table)
+library(dplyr)
 
 
 # activity labels, subject labels, feature labels
