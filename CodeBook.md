@@ -5,9 +5,9 @@ We used the `data.table` framework to import, process and output the tidy data s
 
 ## process
 
-`fread()` - import raw txt files
-`grep()` - used to index feature names with *mean()* and *std()* present in variable names. 
-`fwrite()` - exporting tidy data and tidy summary
+ - `fread()` - import raw txt files
+ - `grep()` - used to index feature names with *mean()* and *std()* present in variable names. 
+ - `fwrite()` - exporting tidy data and tidy summary
 
 all other major data manipulations were accomplished with the data.table[i,j,by] framework with the [vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) providing much of the useful information for concise data wrangling.
 
@@ -17,6 +17,7 @@ all other major data manipulations were accomplished with the data.table[i,j,by]
 
 `str()` prints the following output regarding our tidy data set:
 
+```
 Classes ‘data.table’ and 'data.frame':	10299 obs. of  68 variables:
  $ tBodyAcc-mean()-X          : num  0.282 0.256 0.255 0.343 0.276 ...
  $ tBodyAcc-mean()-Y          : num  -0.0377 -0.06455 0.00381 -0.01445 -0.02964 ...
@@ -86,7 +87,7 @@ Classes ‘data.table’ and 'data.frame':	10299 obs. of  68 variables:
  $ fBodyBodyGyroJerkMag-std() : num  -0.476 -0.493 -0.482 -0.299 -0.3 ...
  $ Subject                    : int  1 1 1 1 1 1 1 1 1 1 ...
  $ Activity                   : chr  "WALKING" "WALKING" "WALKING" "WALKING" ...
- 
+```
  
 ## tidy summary
  
@@ -94,7 +95,7 @@ Classes ‘data.table’ and 'data.frame':	10299 obs. of  68 variables:
  
  `str()` provides the following description of our summary data:
  
- 
+```
  Classes ‘data.table’ and 'data.frame':	180 obs. of  68 variables:
  $ Subject                    : int  1 3 5 6 7 8 11 14 15 16 ...
  $ Activity                   : chr  "WALKING" "WALKING" "WALKING" "WALKING" ...
@@ -164,7 +165,7 @@ Classes ‘data.table’ and 'data.frame':	10299 obs. of  68 variables:
  $ fBodyBodyGyroMag-std()     : num  -0.321 -0.633 -0.59 -0.511 -0.344 ...
  $ fBodyBodyGyroJerkMag-mean(): num  -0.319 -0.608 -0.548 -0.367 -0.155 ...
  $ fBodyBodyGyroJerkMag-std() : num  -0.3816 -0.5491 -0.4557 -0.4081 -0.0842 ...
- 
+```
  
  where each name corresponds to the mean values for that same-named variable in `tidyData.csv`.
  
