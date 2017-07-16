@@ -6,14 +6,27 @@ We used the `data.table` framework to import, process and output the tidy data s
 ## process
 
  - `fread()` - import raw txt files
- - `grep()` - used to index feature names with *mean()* and *std()* present in variable names. 
- - `write.table(...,row.names=FALSE)` - exporting tidy data and tidy summary as requested in the project instructioncs.
+ - `grep()` - used to index feature names with *mean()* and *std()* present in variable names.
+ - `write.table(...,row.names=FALSE)` - exporting tidy data as requested in the project instructioncs.
 
 all other major data manipulations were accomplished with the `data.table[i,j,by]` framework with the [vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) providing much of the useful information for concise data wrangling.
 
+## source data & transformations
+
+  The original source data and transformations are described below from **features_info.txt**:
+
+  > The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+ > Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+ > Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+ > These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
 ## tidy data
 
-  `tidyData.txt` contains our processed data where we extract the average and standard deviation values for each metric and take the mean value of each metric again, by subject and activity labels. More information regarding these metrics can be found in **features_info.txt**. 
+  `tidyData.txt` contains our processed data where we extract the average and standard deviation values for each metric and take the mean value of each metric again, this time, by subject and activity labels. 
 
 `str()` prints the following output regarding our tidy data set.
 
