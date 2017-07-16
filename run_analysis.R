@@ -7,6 +7,9 @@ library(data.table)
 # activity labels, subject labels, feature labels
 labels <- fread("UCI HAR Dataset/activity_labels.txt") 
 features <- fread("UCI HAR Dataset/features.txt") 
+train_subject <- fread("UCI HAR Dataset/train/subject_train.txt")
+test_subject <- fread("UCI HAR Dataset/test/subject_test.txt")
+
 
 # import feature space
 trainx <- fread("UCI HAR Dataset/train/X_train.txt")
@@ -16,10 +19,14 @@ X <- rbindlist(list(trainx,testx))
 # attach feature names
 names(X) <- features[,V2]
 
-
 # subset mean and std variables in features
 index <- grep("\\b-mean\\b|\\b-std()\\b",names(X))
 X <- X[,..index]
+
+# attach subject information to features
+subjects <- rbindlist(list(train_subject,test_subject))
+X <- data.table(X,subjects)
+X[,Subject:=V1][,V1:=NULL]
 
 
 # import response
@@ -32,8 +39,13 @@ data0 <- data.table(X,Y)
 
 # attach activity names
 data1 <- data0[labels, on=.(V1)]
-data2 <- data1[,V1:=NULL] # remove original response
+data2 <- data1[,Activity:=V2][,V1:=NULL][,V2:=NULL]
 
 # output tidy dataset
 fwrite(data2,"tidyData.csv")
 
+# create summary tidy data set
+data3 <- data2[,lapply(.SD,mean),.(Subject,Activity)]
+
+# output summary tidy data set
+fwrite(data3,"tidySummary.csv")
