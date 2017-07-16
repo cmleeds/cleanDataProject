@@ -13,11 +13,10 @@ all other major data manipulations were accomplished with the `data.table[i,j,by
 
 ## tidy data
 
-  `tidyData.csv` contains our processed data where we extract the average and standard deviation values for each metric. More information regarding these metrics can be found in features_info.txt. 
+  `tidyData.txt` contains our processed data where we extract the average and standard deviation values for each metric and take the mean value of each metric again, by subject and activity labels. More information regarding these metrics can be found in **features_info.txt**. 
 
-`str()` prints the following output regarding our tidy data set:
+`str()` prints the following output regarding our tidy data set.
 
- 
 ```
  Classes ‘data.table’ and 'data.frame':	180 obs. of  68 variables:
  $ Subject                    : int  1 3 5 6 7 8 11 14 15 16 ...
@@ -89,6 +88,4 @@ all other major data manipulations were accomplished with the `data.table[i,j,by
  $ fBodyBodyGyroJerkMag-mean(): num  -0.319 -0.608 -0.548 -0.367 -0.155 ...
  $ fBodyBodyGyroJerkMag-std() : num  -0.3816 -0.5491 -0.4557 -0.4081 -0.0842 ...
 ```
- 
- where each name corresponds to the mean values for that same-named variable in `tidyData.csv`.
  
