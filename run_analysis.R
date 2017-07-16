@@ -1,50 +1,39 @@
+# clear workspace
+rm(list=ls())
+
 # load packages
 library(data.table)
-library(dplyr)
-
 
 # activity labels, subject labels, feature labels
 labels <- fread("UCI HAR Dataset/activity_labels.txt") 
 features <- fread("UCI HAR Dataset/features.txt") 
 
-# adjust feature labels before attaching to data
-features <- gsub("-","_",features$V2)
-features <- gsub("\\,","_",features)
-features <- gsub("\\()","",features)
-features <- gsub("\\(","",features)
-features <- gsub("\\)","",features)
-features
-
-# training data import and format
+# import feature space
 trainx <- fread("UCI HAR Dataset/train/X_train.txt")
-names(trainx) <- features
-subsetFeatures <- names(trainx)[grepl("mean",names(trainx)) | grepl("std",names(trainx))]
-trainx <- trainx[,!subsetFeatures,with=F]
-
-trainy <- fread("UCI HAR Dataset/train/y_train.txt")
-names(trainy) <- "activity"
-
-trainSubj <- fread("UCI HAR Dataset/train/subject_train.txt")
-names(trainSubj) <- "subject"
-
-
-
-# test data import and format
 testx <- fread("UCI HAR Dataset/test/X_test.txt")
-names(testx) <- features
-subsetFeatures <- names(testx)[grepl("mean",names(testx)) | grepl("std",names(testx))]
-testx <- testx[,!subsetFeatures,with=F]
+X <- rbindlist(list(trainx,testx))
 
+# attach feature names
+names(X) <- features[,V2]
+
+
+# subset mean and std variables in features
+index <- grep("\\b-mean\\b|\\b-std()\\b",names(X))
+X <- X[,..index]
+
+
+# import response
+trainy <- fread("UCI HAR Dataset/train/y_train.txt")
 testy <- fread("UCI HAR Dataset/test/y_test.txt")
-names(testy) <- "activity"
+Y <- rbindlist(list(trainy,testy))
 
-testSubj <- fread("UCI HAR Dataset/test/subject_test.txt")
-names(testSubj) <- "subject"
+# join features and response
+data0 <- data.table(X,Y)
 
+# attach activity names
+data1 <- data0[labels, on=.(V1)]
+data2 <- data1[,V1:=NULL] # remove original response
 
-# merge datasets
-trainAll <- dplyr::bind_cols(trainSubj,trainy,trainx)
-testAll <- dplyr::bind_cols(testSubj,testy,testx)
-allDat <- rbind(trainAll,testAll)
+# output tidy dataset
+fwrite(data2,"tidyData.csv")
 
-names(labels) <- c("activity","activityLabel")
