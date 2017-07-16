@@ -5,6 +5,7 @@ The file stucture is as follows:
 
   1. **run_analysis.R** - this script contains code to transform raw datasets contained within repository to the output tidy dataset, tidyData.txt. Our script uses the `data.table` framework to read, transform, and output our tidy data set. 
   2. **tidyData.txt** - the output dataset from run_analysis.R. 
+  3. **CodeBook.md** - describes the features and data sources & transformations, the processes used for data cleaning as well as the structure of the final tidy dataset output from `run_analysis.R`.
   3. **getdata_projectfiles_UCI HAR Dataset.zip** - contains the raw download from the assignment home page on coursera.
   4. **UCI HAR Dataset** - extract files from the zip file taken from the assignment home page. These folders contain the raw input data for run_analysis.R.
   
