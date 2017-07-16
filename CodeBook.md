@@ -6,7 +6,7 @@ We used the `data.table` framework to import, process and output the tidy data s
 ## process
 
  - `fread()` - import raw txt files
- - `grep()` - used to index feature names with *mean()* and *std()* present in variable names.
+ - `grep("\\b-mean()\\b|\\b-std()\\b",...)` - used to index feature names with *mean()* and *std()* present in variable names.
  - `write.table(...,row.names=FALSE)` - exporting tidy data as requested in the project instructioncs.
 
 all other major data manipulations were accomplished with the `data.table[i,j,by]` framework with the [vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) providing much of the useful information for concise data wrangling.

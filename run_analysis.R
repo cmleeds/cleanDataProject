@@ -20,7 +20,7 @@ X <- rbindlist(list(trainx,testx))
 names(X) <- features[,V2]
 
 # subset mean and std variables in features
-index <- grep("\\b-mean\\b|\\b-std()\\b",names(X))
+index <- grep("\\b-mean()\\b|\\b-std()\\b",names(X))
 X <- X[,..index]
 
 # attach subject information to features
