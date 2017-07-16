@@ -41,11 +41,8 @@ data0 <- data.table(X,Y)
 data1 <- data0[labels, on=.(V1)]
 data2 <- data1[,Activity:=V2][,V1:=NULL][,V2:=NULL]
 
-# output tidy dataset
-fwrite(data2,"tidyData.csv")
-
 # create summary tidy data set
 data3 <- data2[,lapply(.SD,mean),.(Subject,Activity)]
 
 # output summary tidy data set
-fwrite(data3,"tidySummary.csv")
+write.table(data3,"tidyData.txt",row.names=F)
